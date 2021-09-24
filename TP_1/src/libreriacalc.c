@@ -18,10 +18,18 @@ int multiplicacion(int A,int B){
 float division(int A, int B){
 	return (float)A/B;
 }
-int factorial(int A){
-	int  b, fact = 1;
-	for (b = A; b > 1; b--){
-		fact = fact * b;
-	}
-	  return fact;
+int factorial (int a)
+{
+    int fact;
+    if (a == 0 || a == 1)
+    {
+        fact = 1;
+    }
+    else
+    {
+        fact = a * factorial(a - 1);
+    }
+
+    return fact;
 }
+

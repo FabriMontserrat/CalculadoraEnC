@@ -14,147 +14,121 @@
 
 int main(void) {
 	setbuf(stdout,NULL);
-	int a;
-	int b;
+	int a = 0;
+	int b = 0;
 	int respuesta;
-	char seguir = 's';
-	char noValido = 's';
+	char mostrarMenu = 's';
+	int resSuma = 0;
+	int resResta = 0;
+	float resDivision = 0;
+	int resMultiplicacion = 0;
+	int resFactorialA = 0;
+	int resFactorialB = 0;
+	int calculo = 0;
 
-	while(seguir == 's' )
+
+
+	while (mostrarMenu == 's')
 	{
-		printf("Ingrese el primer numero:\n ");
-		scanf("%d",&a);
+		printf("1 = Ingresar primer operando (A=%d)\n",a);
+		printf("2 = Ingresar segundo operando (B=%d)\n",b);
+		printf("3 = Calcular todas las operaciones\n");
+		printf("4 = Informar resultados\n");
+		printf("5 = Salir\n");
+		scanf("%d",&respuesta);
 		fflush (stdin);
-		printf("Ingrese el segundo numero:\n ");
-		scanf("%d",&b);
-		fflush (stdin);
 
-		while (noValido == 's')
-		{
-			printf("Primer numero: %d Segundo numero: %d\n",a,b);
-			printf("Seleccione una opcion:\n");
-			printf("1 = Sumar\n");
-			printf("2 = Restar\n");
-			printf("3 = Multiplicar\n");
-			printf("4 = Dividir\n");
-			printf("5 = Factorial\n");
-			printf("6 = Todas las anteriores\n");
-			printf("7 = Salir \n;");
-			scanf("%d",&respuesta);
-			fflush (stdin);
+			switch(respuesta)
+			{
+				case 1:
+					printf("Ingrese el primer numero:\n");
+					scanf("%d",&a);
+					fflush (stdin);
+					mostrarMenu = 's';
+					calculo = 0;
+				break;
 
-				switch(respuesta)
-				{
-					case 1:
-						printf("El resultado de la suma es: %d\n",suma(a,b));
-						noValido = 'n';
-					break;
+				case 2:
+					printf("Ingrese el segundo numero:\n ");
+					scanf("%d",&b);
+					fflush (stdin);
+					mostrarMenu = 's';
+					calculo = 0;
+				break;
 
-					case 2:
-						printf("El resultado de la resta es: %d\n",resta(a,b));
-						noValido = 'n';
-					break;
+				case 3:
+					resSuma = suma(a,b);
+					resResta = resta(a,b);
+					if(b != 0)
+					{
+						resDivision =division(a,b);
+					}
+					resMultiplicacion = multiplicacion(a,b);
+									if(a >= 0)
+										{
+										resFactorialA =	factorial(a);
+										}
+									if(b >= 0)
+										{
+										resFactorialB = factorial(b);
+										}
+					calculo = 1;
+				break;
 
-					case 3:
-										printf("La multiplicacion da: %d \n",multiplicacion(a,b));
-										noValido = 'n';
-					break;
-
-					case 4:
-						if(b==0)
+				case 4:
+					if(calculo == 1)
 						{
-							printf("No se puede dividir por 0\n");
-						}
-						else
-						{
-							printf("El resultado de la division es: %f\n",division(a,b));
-						}
-						noValido = 'n';
-					 break;
-
-					case 5:
-						if(a >= 0 && b >= 0)
-						{
-							printf("El factorial de %d es %d y el factorial de %d es %d\n",a,factorial(a),b,factorial(b));
-							noValido = 'n';
-						}
-						else
-							if(a<0)
-							{
-								printf("%d es negativo y no es posible, el factorial de %d es %d\n",a,b,factorial(b));
-								noValido = 'n';
-							}
-							else
-							{
-								printf("%d es negativo y no es posible, el factorial de %d es %d\n",b,a,factorial(a));
-								noValido = 'n';
-							}
-					break;
-
-					case 6:
-						printf("El resultado de la suma es: %d\n",suma(a,b));
-						printf("El resultado de la resta es: %d\n",resta(a,b));
-						printf("La multiplicacion da: %d \n",multiplicacion(a,b));
-						if(b==0)
+							printf("El resultado de %d + %d es: %d\n",a,b,resSuma);
+							printf("El resultado de %d - %d es: %d\n",a,b,resResta);
+							printf("El resultado de %d * %d es: %d\n",a,b,resMultiplicacion);
+							if(b == 0)
 							{
 								printf("No se puede dividir por 0\n");
 							}
 							else
-								{
-									printf("El resultado de la division es: %f\n",division(a,b));
-								}
-						if(a >= 0 && b >= 0)
-												{
-													printf("El factorial de %d es %d y el factorial de %d es %d\n",a,factorial(a),b,factorial(b));
-													noValido = 'n';
-												}
-												else
-													if(a<0)
-													{
-														printf("%d es negativo y no es posible, el factorial de %d es %d\n",a,b,factorial(b));
-														noValido = 'n';
-													}
-													else
-													{
-														printf("%d es negativo y no es posible, el factorial de %d es %d\n",b,a,factorial(a));
-														noValido = 'n';
-													}
-						noValido = 'n';
-						break;
-
-					case 7:
-						noValido = 'n';
-						seguir = 'n';
-					break;
-
-					default:
-						printf("Ingrese una opcion valida:\n");
-						noValido = 's';
-
-				}
-		}
-			if(respuesta >= 1 && respuesta <= 6)
-				{
-				printf("quiere realizar otra operacion? s/n\n");
-				scanf("%c",&seguir);
-				fflush (stdin);
-					while(seguir != 's' && seguir != 'n')
+							{
+								printf("El resultado de %d / %d es: %f\n",a,b,resDivision);
+							}
+							printf("Factorial:\nFactorial operador A: ");
+							if(a < 0)
+											{
+												printf("(No se pueden numeros negativos)");
+											}
+											else
+											{
+												printf("%d",resFactorialA);
+											}
+							printf("\nFactorial operador B: ");
+							if(b < 0)
+										{
+											printf("(No se pueden numeros negativos)\n");
+										}
+											else
+											{
+												printf("%d\n",resFactorialB);
+											}
+						}
+					else
 					{
-						printf("Ingrese una opcion valida: s/n\n");
-						scanf("%c",&seguir);
-						fflush (stdin);
+						printf("No se pueden mostrar los resultados sin antes calcularlos\n");
 					}
+					system("pause");
+				break;
 
-					if(seguir == 's')
-					{
-					noValido = 's';
-					}
-				}
+				case 5:
+					mostrarMenu = 'n';
+				break;
+
+				default:
+					printf("Ingrese una opcion valida:\n");
+					mostrarMenu = 's';
+				break;
+
+			}
 	}
-
-
 
 system("pause");
 return EXIT_SUCCESS;
 
 }
+
