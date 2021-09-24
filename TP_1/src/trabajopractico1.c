@@ -85,6 +85,11 @@ int main(void) {
 				{
 				printf("quiere realizar otra operacion? s/n\n");
 				scanf("%c",&seguir);
+
+					if(seguir == 's')
+					{
+					noValido = 's';
+					}
 				}
 	}
 
